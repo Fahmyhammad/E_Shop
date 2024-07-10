@@ -1,0 +1,34 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        // Layout = parentLayout.ToString();
+        Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Edit My Account</h3>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+<br />
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

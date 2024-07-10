@@ -1,0 +1,54 @@
+﻿@if (TempData["Create"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["success"]("New item has been Added", "Create")
+    </script>
+}
+
+@if (TempData["Edit"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["info"]("Done Editing", "Edit")
+    </script>
+}
+
+
+@if (TempData["Delete"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["error"]("item has been successfully Deleted", "Delete")
+    </script>
+}
+@if (TempData["OrderView"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["info"]("Order has Shiped Successfully", "Order..")
+    </script>
+}
+
+@if (TempData["CancelOrder"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["info"]("Order has Cancelled Successfully", "Order..")
+    </script>
+}
+
+
+@if (TempData["OrderProccessing"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["info"]("Order Request in processing", "Order..")
+    </script>
+}

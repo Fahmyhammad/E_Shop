@@ -1,0 +1,132 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Orderconfirmation";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+ @* <div class="Container row">
+    <div class="col-12">
+        <h1>Order confirmation</h1>
+    <br />
+    <hr />
+    <h4>your Order Number @Model Has been Successfully Placed</h4>
+    </div>
+
+</div> *@
+ 
+
+
+
+ <div class="container mt-0 d-flex justify-content-center">
+
+    <div class="card p-4 mt-3">
+        <div class="first d-flex justify-content-between align-items-center mb-3">
+            <div class="info">
+                <span class="d-block name">Thank you</span>
+                <div class="money d-flex flex-row mt-2 align-items-center">
+                    <span class="ml-2">Order Number : @Model  Charged... </span>
+                </div>
+            </div>
+
+            <img src="https://i.imgur.com/NiAVkEw.png" width="40" />
+
+
+        </div>
+        <div class="detail">
+            <span class="d-block summery">Your order has been dispatched. we are delivering you order.</span>
+        </div>
+        <hr>
+        <div class="  money d-flex flex-row mt-2 align-items-center">
+            <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
+
+            <span class="ml-2">Cash on Delivery</span>
+
+        </div>
+        <div class="last d-flex align-items-center mt-3">
+            <a href="/Customer/Cart/Index" class="btn btn-danger btn-sm ">Exit</a>
+        </div>
+    </div>
+</div>
+<br />
+
+
+
+
+
+<style>
+
+
+    body {
+        background-color: #eee;
+    }
+
+    .card {
+        background-color: #fff;
+        width: 500px;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .info {
+        line-height: 19px;
+    }
+
+    .name {
+        color: #4c40e0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .order {
+        font-size: 14px;
+        font-weight: 400;
+        color: #b7b5b5;
+    }
+
+    .detail {
+        line-height: 30px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .summery {
+        color: #d2cfcf;
+        font-weight: 400;
+        font-size: 13px;
+    }
+
+    }
+
+    .text {
+        line-height: 15px;
+    }
+
+    .new {
+        color: #000;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .money {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .address {
+        color: #d2cfcf;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .last {
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+
+    .address-line {
+        color: #4C40E0;
+        font-size: 11px;
+        font-weight: 700;
+    }
+</style>

@@ -1,0 +1,60 @@
+﻿@model ProductViewModel
+@{
+    ViewBag.PageTitle = "Product Management";
+    ViewBag.CardTitle = "Create Product";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Product.Name" class="form-label"></label>
+                    <input asp-for="Product.Name" class="form-control" />
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Description" class="form-label"></label>
+                    <textarea asp-for="Product.Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Price" class="form-label"></label>
+                    <input asp-for="Product.Price" class="form-control" />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Image" class="form-label"></label>
+                    <input type="file" asp-for="file" required class="form-control" onchange="loadFile(event)" />
+                    <img id="MyImage" class="img-thumbnail mt-2" style="max-width: 50%; height: auto;" />
+                    <span asp-validation-for="Product.Image" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.CategoryId" class="form-label"></label>
+                    <select asp-for="Product.CategoryId" class="form-control" asp-items="Model.CategoryList">
+                        <option disabled selected>--Select Category--</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-outline-success">Save</button>
+                    <a class="btn btn-outline-danger" asp-area="Admin" asp-action="Index" asp-controller="Product">Go To Home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var myimg = document.getElementById('MyImage');
+                myimg.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}
