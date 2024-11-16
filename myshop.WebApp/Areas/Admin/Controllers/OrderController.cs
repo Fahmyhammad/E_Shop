@@ -31,8 +31,9 @@ namespace myshop.WebApp.Areas.Admin.Controllers
         {
             OrderViewModel orderVM = new OrderViewModel()
             {
-                OrderHeader = _unitOfWork.OrderHeader.GetById(x => x.Id == orderid, IncludeWord: "AppUser"),
-                orderDetails = _unitOfWork.OrderDetail.GetAll(x=>x.OrderId == orderid , IncludeWord: "Product")
+                OrderHeader = _unitOfWork.OrderHeader.GetById(x => x.Id == orderid , IncludeWord: "AppUser"),
+                orderDetails = _unitOfWork.OrderDetail.GetAll(x=>x.OrderId == orderid , IncludeWord: "Product"),
+               
             };
             return View(orderVM);
         }

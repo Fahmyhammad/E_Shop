@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using myshop.Utilities;
 using Stripe;
-using myshop.DataAccess.DbInitializer;
+using myshop.Entities.Models;
+using myshop.DataAccess.Seeds;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnE_Shop")));
+
+
 
 
 builder.Services.Configure<StripeDetails>(builder.Configuration.GetSection("Stripe"));
@@ -26,14 +29,37 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.Locko
 
 
 builder.Services.AddSingleton<IEmailSender,EmailSender>();
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+var logger = loggerFactory.CreateLogger<Program>();
+try
+{
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await DefaultRoles.SeedAsync(roleManager, logger);
+    await DefaultUsers.SeedAdminUser(userManager, logger);
+    await DefaultUsers.SeedUserAsync(userManager, logger);
+}
+catch (Exception ex)
+{
+    var loggers = services.GetRequiredService<ILogger<Program>>();
+    loggers.LogError(ex, "An error occurred during seeding.");
+}
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -50,7 +76,6 @@ app.UseRouting();
 
 StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:Secretkey").Get<string>();
 
-SeedDb();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -76,11 +101,3 @@ app.MapControllerRoute(
 
 app.Run();
 
-void SeedDb()
-{
-    using (var scope = app.Services.CreateScope())
-    {
-        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-        dbInitializer.Initializer();
-    }
-}

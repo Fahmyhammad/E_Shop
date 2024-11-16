@@ -51,7 +51,6 @@ namespace myshop.myshop.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    OrderHeaderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
@@ -65,18 +64,9 @@ namespace myshop.myshop.DataAccess.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_orderDetails_orderHeaders_OrderHeaderId",
-                        column: x => x.OrderHeaderId,
-                        principalTable: "orderHeaders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_orderDetails_OrderHeaderId",
-                table: "orderDetails",
-                column: "OrderHeaderId");
+           
 
             migrationBuilder.CreateIndex(
                 name: "IX_orderDetails_ProductId",
