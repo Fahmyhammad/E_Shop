@@ -11,7 +11,7 @@ namespace myshop.DataAccess.Seeds
         {
             var defaultUser = new AppUser
             {
-                UserName = "admin",
+                UserName = "baseadmin@gmail.com",
                 Email = "baseadmin@gmail.com",
                 Name = "Fahmy Hammad",
                 PhoneNumber = "01006747608",

@@ -162,7 +162,7 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                     OrderDetail orderDetail = new OrderDetail()
                     {
                         ProductId = item.ProductId,
-                        OrderId = cartView.OrderHeader.Id,
+                        OrderHeaderId = cartView.OrderHeader.Id,
                         Price = item.Product.Price,
                         Count = item.Count
                     };

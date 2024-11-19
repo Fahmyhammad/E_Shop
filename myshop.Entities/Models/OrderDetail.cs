@@ -13,8 +13,7 @@ namespace myshop.Entities.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey(nameof(OrderHeader))]
-        public int OrderId { get; set; }  
+        public int OrderHeaderId { get; set; }  
         [ValidateNever]
         [NotMapped]
         public OrderHeader OrderHeader { get; set; }
