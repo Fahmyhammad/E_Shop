@@ -21,7 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.Configure<StripeDetails>(builder.Configuration.GetSection("Stripe"));
 
 // Configure Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(4);
 })

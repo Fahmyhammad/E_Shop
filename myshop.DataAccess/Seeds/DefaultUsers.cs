@@ -40,8 +40,7 @@ namespace myshop.DataAccess.Seeds
 
         public static async Task SeedUserAsync(UserManager<AppUser> userManager, ILogger logger)
         {
-            if (!userManager.Users.Any())
-            {
+            
                 var defaultUser = new AppUser
                 {
                     Name = "User",
@@ -66,7 +65,7 @@ namespace myshop.DataAccess.Seeds
                         logger.LogError("Error creating user: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
                     }
                 }
-            }
+            
         }
     }
 }
