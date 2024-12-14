@@ -29,6 +29,19 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     .AddDefaultTokenProviders()
     .AddDefaultUI();
 
+
+// في Startup.cs أو مكان إعداد UserManager
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+});
+
+
+
 // Add custom services
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -57,7 +70,7 @@ using (var scope = app.Services.CreateScope())
         logger.LogInformation("Roles seeded successfully.");
 
         logger.LogInformation("Starting seeding admin user...");
-        await DefaultUsers.SeedAdminUser(userManager, logger);
+        await DefaultUsers.SeedAdminUser(userManager,roleManager , logger);
         logger.LogInformation("Admin user seeded successfully.");
 
         logger.LogInformation("Starting seeding normal users...");

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using myshop.Entities.Models;
+using myshop.Utilities;
 
 namespace myshop.WebApp.Areas.Identity.Pages.Account
 {
@@ -106,7 +107,8 @@ namespace myshop.WebApp.Areas.Identity.Pages.Account
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = Url.Content("~/Customer/Home/Index"); // تعديل هنا لتوجيه المستخدم إلى الصفحة الرئيسية المطلوبة.
+           
+          //  returnUrl = Url.Content("~/Customer/Home/Index"); // تعديل هنا لتوجيه المستخدم إلى الصفحة الرئيسية المطلوبة.
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -114,14 +116,23 @@ namespace myshop.WebApp.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe , lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    if (User.IsInRole(SD.AdminRole))
+                    {
+                        return LocalRedirect(returnUrl = Url.Content("~/Admin/Dashboard/Index"));
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
+                    if (User.IsInRole(SD.AdminRole))
+                    {
+                      //  returnUrl = Url.Content("~/Admin/Dashboard/Index");
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl = Url.Content("~/Admin/Dashboard/Index") , RememberMe = Input.RememberMe });
+                    }
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
                 if (result.IsLockedOut)
