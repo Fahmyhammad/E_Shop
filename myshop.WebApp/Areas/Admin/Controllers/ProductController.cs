@@ -144,7 +144,7 @@ namespace myshop.WebApp.Areas.Admin.Controllers
                 TempData["Edit"] = "Edit Product";
                 return RedirectToAction("Index");
             }
-            return View(model.Product);
+            return View(model);
         }
 
         [HttpGet]
