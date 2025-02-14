@@ -1,7 +1,6 @@
 ﻿@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
-        // Layout = parentLayout.ToString();
         Layout = "~/Views/Shared/_CustomerLayout.cshtml";
     }
     else
@@ -10,25 +9,75 @@
     }
 }
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 rounded-4">
+                <!-- Header -->
+                <div class="card-header bg-gradient text-white text-center py-4">
+                    <h3 class="card-title mb-0">Edit My Account</h3>
+                </div>
 
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Edit My Account</h3>
-    </div>
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <partial name="_ManageNav" />
-            </div>
-            <div class="col-md-9">
-                @RenderBody()
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-4">
+                            <div class="list-group shadow-sm rounded-3">
+                                <partial name="_ManageNav" />
+                            </div>
+                        </div>
+
+                        <!-- Content Section -->
+                        <div class="col-md-8">
+                            <div class="content-area p-4 rounded-3 shadow-sm">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <br />
 </div>
-<br />
+
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
+
+<style>
+    /* تحسين مظهر الصفحة */
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        background: #fff;
+        transition: 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .bg-gradient {
+        background: linear-gradient(135deg, #007bff, #00c6ff);
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 12px 18px;
+        transition: all 0.3s ease-in-out;
+        font-weight: 500;
+        color: #333;
+    }
+
+        .list-group-item:hover, .list-group-item.active {
+            background: #007bff;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+    .content-area {
+        background: #f8f9fa;
+        min-height: 300px;
+        border-radius: 10px;
+    }
+</style>
