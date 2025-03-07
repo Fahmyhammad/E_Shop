@@ -1,23 +1,23 @@
 ﻿@using myshop.Utilities
 @model ShoppingCartView
 @{
-   Layout = "/Views/Shared/_CustomerLayout.cshtml";
+    Layout = "/Views/Shared/_CustomerLayout.cshtml";
 }
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shopping Cart</title>
+    <title>سلة التسوق</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-     <link rel="stylesheet" href="~/ShoppingCart/assets/css/style.css">
- </head>
+    <link rel="stylesheet" href="~/ShoppingCart/assets/css/style.css">
+</head>
 <body>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Shopping Cart</h3>
+            <h3 class="card-title">سلة التسوق</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -40,7 +40,7 @@
                                 <div class="items">
                                     @foreach (var item in Model.CartsList)
                                     {
-                                        <div class="product">                                  
+                                        <div class="product">
                                             <div class="row border-top border-bottom">
                                                 <div class="row main align-items-center">
                                                     <div class="col-2"><img class="img-fluid" src="~/Images/Products/@item.Product.Image"></div>
@@ -49,26 +49,28 @@
                                                         <div class="row">@item.Product.Description</div>
                                                     </div>
                                                     <div class="col">
-                                                        <a class="btn btn-outline-primary btn-sm " style="widows:1px; height:30px;" asp-action="Plus" asp-route-cartid="@item.Id">+</a>
+                                                        <a class="btn btn-outline-primary btn-sm" style="width:1px; height:30px;" asp-action="Plus" asp-route-cartid="@item.Id">+</a>
                                                         <span style="margin:4px">@item.Count</span>
-                                                        <a class="btn btn-outline-primary btn-sm" style="widows:1px; height:30px;" asp-action="Minus" asp-route-cartid="@item.Id">-</a>
+                                                        <a class="btn btn-outline-primary btn-sm" style="width:1px; height:30px;" asp-action="Minus" asp-route-cartid="@item.Id">-</a>
                                                     </div>
-                                                    <div class="col">$ @item.Product.Price <a asp-action="Delete" asp-route-cartid="@item.Id" class="close">&#10005;</a></div>
+                                                    <div class="col">ج.م @item.Product.Price <a asp-action="Delete" asp-route-cartid="@item.Id" class="close">&#10005;</a></div>
                                                 </div>
                                             </div>
-                                           <br />
+                                            <br />
                                         </div>
                                     }
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <div class="summary">
-                                    <h3>Summary</h3>
-                                    <div class="summary-item"><span class="text">Total : </span><span class="price">$@Model.TotalCarts.ToString()</span></div>
-                                    <br />   
+                                    <h3>ملخص الطلب</h3>
+                                    <div class="summary-item"><span class="text">الإجمالي: </span><span class="price">ج.م @Model.TotalCarts.ToString()</span></div>
+                                    <br />
                                     @if (Model.TotalCarts.ToString() != "0")
                                     {
-                                        <a href="\Customer\Cart\Summary" class="btn btn-outline-primary btn-lg btn-block">Checkout</a><br />
+                                        <a href="\Customer\Cart\Summary" class="btn btn-outline-primary btn-lg btn-block">الدفع</a>
+
+                                        <br />
                                     }
                                 </div>
                             </div>
@@ -84,7 +86,7 @@
 </body>
 </html>
 
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
 <!-- Theme style -->
@@ -92,8 +94,3 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 <link rel="stylesheet" href="/css/adminlte.min.css">
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
- 
-
-
-
-

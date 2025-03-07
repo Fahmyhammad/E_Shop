@@ -1,7 +1,7 @@
-﻿@model Product;
+﻿@model Product
 @{
-    ViewBag.PageTitle = "Product Management";
-    ViewBag.CardTitle = "Delete Category";
+    ViewBag.PageTitle = "إدارة المنتجات";
+    ViewBag.CardTitle = "حذف منتج";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
@@ -11,33 +11,33 @@
             <input hidden asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Name"></label>
+                <label asp-for="Name">الاسم</label>
                 <input asp-for="Name" disabled class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description"></label>
+                <label asp-for="Description">الوصف</label>
                 <input asp-for="Description" disabled class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Price"></label>
+                <label asp-for="Price">السعر</label>
                 <input asp-for="Price" disabled class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Image"></label>
+                <label asp-for="Image">الصورة</label>
                 <img src="~/Images/Products/@Model.Image" class="img-thumbnail" style="width:64px; height:64px;" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="CategoryId"></label>
+                <label asp-for="CategoryId">الفئة</label>
                 <input asp-for="CategoryId" disabled class="form-control" />
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <button type="submit" asp-area="Admin" asp-action="DeleteProduct" asp-controller="Product" class="btn btn-outline-danger" style="width:120px; height:40px;">Delete</button> ||
-                <a asp-action="Index" asp-controller="Product" class="btn btn-outline-success" style="width:120px; height:40px;">Go To Home</a>
+                <button type="submit" asp-area="Admin" asp-action="DeleteProduct" asp-controller="Product" class="btn btn-outline-danger" style="width:120px; height:40px;">حذف</button> ||
+                <a asp-action="Index" asp-controller="Product" class="btn btn-outline-success" style="width:120px; height:40px;">العودة للقائمة</a>
             </div>
         </form>
     </div>

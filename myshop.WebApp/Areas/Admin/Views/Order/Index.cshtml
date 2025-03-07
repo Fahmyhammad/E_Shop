@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OrderHeader>
 @{
-    ViewBag.PageTitle = "Order Management";
-    ViewBag.CardTitle = "View Orders";
+    ViewBag.PageTitle = "إدارة الطلبات";
+    ViewBag.CardTitle = "عرض الطلبات";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
@@ -10,9 +10,9 @@
         <div class="col-12">
             <form class="form-inline" asp-area="Admin" asp-action="Search" asp-controller="Order">
                 <div class="input-group" style="width: 100%;">
-                    <input class="form-control" type="search" placeholder="Search" name="order" style="flex: 1;">
+                    <input class="form-control" type="search" placeholder="بحث" name="order" style="flex: 1;">
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-outline-primary py-1 px-4">Search</button>
+                        <button type="submit" class="btn btn-outline-primary py-1 px-4">بحث</button>
                     </div>
                 </div>
             </form>
@@ -23,13 +23,13 @@
         <table id="myTable" class="table table-striped table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">PhoneNumber</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">OrderStatus</th>
-                    <th scope="col">OrderTotal</th>
-                    <th scope="col">Details</th>
+                    <th scope="col">الرقم</th>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">رقم الهاتف</th>
+                    <th scope="col">البريد الإلكتروني</th>
+                    <th scope="col">حالة الطلب</th>
+                    <th scope="col">إجمالي الطلب</th>
+                    <th scope="col">التفاصيل</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                         <td>@item.OrderStatus</td>
                         <td>@item.TotalPrice</td>
                         <td>
-                            <a class="btn btn-outline-success btn-sm" href="/Admin/Order/Details?orderId=@item.Id">Details</a>
+                            <a class="btn btn-outline-success btn-sm" href="/Admin/Order/Details?orderId=@item.Id">التفاصيل</a>
                         </td>
                     </tr>
                 }

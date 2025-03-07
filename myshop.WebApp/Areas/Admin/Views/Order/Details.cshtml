@@ -2,8 +2,8 @@
 @model OrderViewModel
 
 @{
-    ViewBag.PageTitle = "View Order Details";
-    ViewBag.CardTitle = "View Orders";
+    ViewBag.PageTitle = "عرض تفاصيل الطلب";
+    ViewBag.CardTitle = "تفاصيل الطلب";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
@@ -16,109 +16,109 @@
                     <div class="col-12 col-lg-6 pb-4">
                         <div class="row">
                             <h3 class="d-flex justify-content-between align-items-center mb-3">
-                                <span>PickUp Details</span>
+                                <span>تفاصيل الاستلام</span>
                             </h3>
                         </div>
 
                         <div class="row my-1">
-                            <div class="col-3">Name</div>
+                            <div class="col-3">الاسم</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.Name" type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Phone</div>
+                            <div class="col-3">رقم الهاتف</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.PhoneNumber" type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Address</div>
+                            <div class="col-3">العنوان</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.Adderss" type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.Adderss" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">City</div>
+                            <div class="col-3">المدينة</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.City" type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.City" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Email</div>
+                            <div class="col-3">البريد الإلكتروني</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.AppUser.Email" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.AppUser.Email" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Order Date</div>
+                            <div class="col-3">تاريخ الطلب</div>
                             <div class="col-9">
                                 <input value="@Model.OrderHeader.OrderDate.ToShortDateString()" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.OrderDate" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Carrier</div>
+                            <div class="col-3">شركة الشحن</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.Carrier" required id="carrier" type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.Carrier" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Tracking Num</div>
+                            <div class="col-3">رقم التتبع</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.TrackingNumber" required id="tracking" type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.TrackingNumber" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Shopping Date</div>
+                            <div class="col-3">تاريخ الشحن</div>
                             <div class="col-9">
                                 <input value="@Model.OrderHeader.ShoppingDate.ToShortDateString()" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.ShoppingDate" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Session ID</div>
+                            <div class="col-3">معرف الجلسة</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.SessionId" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.SessionId" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Pay Intent ID</div>
+                            <div class="col-3">معرف الدفع</div>
                             <div class="col-9">
                                 <input asp-for="OrderHeader.PaymentIntentId" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.PaymentIntentId" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Payment Date</div>
+                            <div class="col-3">تاريخ الدفع</div>
                             <div class="col-9">
                                 <input value="@Model.OrderHeader.PaymentDate.ToShortDateString()" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.PaymentDate" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="row my-1">
-                            <div class="col-3">Pay Status</div>
+                            <div class="col-3">حالة الدفع</div>
                             <div class="col-9">
                                 <input asp-for="@Model.OrderHeader.OrderStatus" readonly type="text" class="form-control" />
                                 <span asp-validation-for="OrderHeader.PaymentStatus" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <input type="submit" asp-action="UpdateOrderDetails" class="btn btn-outline-primary form-control my-1" value="Update Pickup Details" />
+                        <input type="submit" asp-action="UpdateOrderDetails" class="btn btn-outline-primary form-control my-1" value="تحديث تفاصيل الاستلام" />
                     </div>
                     <div class="col-12 col-lg-5 offset-lg-1">
                         <h4 class="d-flex justify-content-between align-items-mb-3">
-                            <span>Order Summary</span>
+                            <span>ملخص الطلب</span>
                         </h4>
-                        <label class="btn btn-outline-primary form-control my-2">Order Status - @Model.OrderHeader.OrderStatus</label>
+                        <label class="btn btn-outline-primary form-control my-2">حالة الطلب - @Model.OrderHeader.OrderStatus</label>
                         <ul class="list-group mb-3">
                             @foreach (var item in Model.orderDetails)
                             {
@@ -126,8 +126,8 @@
                                     <div class="row container">
                                         <div class="col-8">
                                             <h6 class="my-0 text-primary">@item.Product.Name</h6>
-                                            <small class="text-muted">Price: @item.Product.Price</small><br />
-                                            <small class="text-muted">Quantity: @item.Count</small>
+                                            <small class="text-muted">السعر: @item.Product.Price</small><br />
+                                            <small class="text-muted">الكمية: @item.Count</small>
                                         </div>
                                         <div class="col-4 text-end">
                                             <p class="text-success">@((item.Count * item.Price).ToString("c"))</p>
@@ -138,7 +138,7 @@
                             <li class="list-group-item bg-dark">
                                 <div class="row container">
                                     <div class="col-6">
-                                        <h5 class="text-white">TOTAL</h5>
+                                        <h5 class="text-white">الإجمالي</h5>
                                     </div>
                                     <div class="col-6 text-end">
                                         <h5 class="text-white">@Model.OrderHeader.TotalPrice.ToString("c")</h5>
@@ -149,20 +149,16 @@
 
                         @if (Model.OrderHeader.OrderStatus == SD.Approve)
                         {
-                            <input type="submit" asp-action="StartProccess" class="btn btn-outline-primary" value="Start Process" />
-                            <input type="submit" class="btn btn-outline-danger" asp-action="CancelOrder" value="Cancel Order" />
+                            <input type="submit" asp-action="StartProccess" class="btn btn-outline-primary" value="بدء المعالجة" />
+                            <input type="submit" class="btn btn-outline-danger" asp-action="CancelOrder" value="إلغاء الطلب" />
                         }
                         @if (Model.OrderHeader.OrderStatus == SD.Proccessing)
                         {
-                            <input type="submit" asp-action="StartShip" onclick="return CheckData()" class="btn btn-outline-success" value="Start Shipping" />
+                            <input type="submit" asp-action="StartShip" onclick="return CheckData()" class="btn btn-outline-success" value="بدء الشحن" />
                         }
-                       @*  @if (Model.OrderHeader.OrderStatus != SD.Cancelled && Model.OrderHeader.OrderStatus != SD.Refund)
-                        {
-                            <input type="submit" class="btn btn-outline-danger" asp-action="CancelOrder" value="Cancel Order" />
-                        } *@
                         @if (Model.OrderHeader.OrderStatus == SD.Cancelled || Model.OrderHeader.OrderStatus == SD.Refund)
                         {
-                            <p class="text-danger">Order has been cancelled or refunded.</p>
+                            <p class="text-danger">تم إلغاء الطلب أو استرداد الأموال.</p>
                         }
                     </div>
                 </div>

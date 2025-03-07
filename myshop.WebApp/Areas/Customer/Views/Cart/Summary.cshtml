@@ -2,40 +2,40 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<myshop.Utilities.StripeDetails> Stripe
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
-    <link href="~/summary/css/stylesheet.css" rel="stylesheet" />
-    <title>Summary</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+<link href="~/summary/css/stylesheet.css" rel="stylesheet" />
+<title>ملخص الطلب</title>
+
 <form method="post" enctype="multipart/form-data">
-<div class="wrapper">
-    <div class="h5 large">Billing Address</div>
-    <div class="row">
-        <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
-            <div class="mobile h5">Billing Address</div>
-            <div id="details" class="bg-white rounded pb-5">
-               
+    <div class="wrapper">
+        <div class="h5 large">عنوان الفاتورة</div>
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
+                <div class="mobile h5">عنوان الفاتورة</div>
+                <div id="details" class="bg-white rounded pb-5">
                     <div class="form-group">
-                        <label asp-for="@Model.OrderHeader.Name"></label>
+                        <label asp-for="@Model.OrderHeader.Name">الاسم</label>
                         <input asp-for="@Model.OrderHeader.Name" class="form-control" required />
                         <span asp-validation-for="@Model.OrderHeader.Name" class="text-danger"></span>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>City</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
+                                <label>المدينة</label>
+                                <div class="d-flex justify-content-start align-items-center rounded p-2">
                                     <input asp-for="@Model.OrderHeader.City" required />
-                                    <span asp-validation-for="@Model.OrderHeader.City"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.OrderHeader.City" class="text-danger"></span>
                                     <span class="fas fa-check text-success pr-2"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Phone</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
+                                <label>رقم الهاتف</label>
+                                <div class="d-flex justify-content-start align-items-center rounded p-2">
                                     <input asp-for="@Model.OrderHeader.PhoneNumber" required />
                                     <span class="fas fa-check text-success pr-2"></span>
                                 </div>
@@ -45,77 +45,53 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label>Address</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                    <input asp-for="@Model.OrderHeader.Adderss"required />
+                                <label>العنوان</label>
+                                <div class="d-flex justify-content-start align-items-center rounded p-2">
+                                    <input asp-for="@Model.OrderHeader.Adderss" required />
                                     <span class="fas fa-check text-success pr-2"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                   
-            
-        
+                </div>
             </div>
-            
-         
+            <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1 pt-lg-0 pt-3">
+                <div id="cart" class="bg-white rounded">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="h6">ملخص الطلب</div>
+                    </div>
+                    @foreach (var item in Model.CartsList)
+                    {
+                        <div class="d-flex justify-content-between align-items-center pt-3 pb-2 border-bottom">
+                            <div class="item pr-2">
+                                <img src="~/Images/Products/@item.Product.Image" alt="" width="80" height="80">
+                                <div class="number">@item.Count</div>
+                            </div>
+                            <div class="d-flex flex-column px-3">
+                                <b class="h5">@item.Product.Name</b>
+                            </div>
+                            <div class="ml-auto">
+                                <b class="h5">ج.م @item.Product.Price</b>
+                            </div>
+                        </div>
+                    }
+                    <div class="d-flex align-items-center py-2">
+                        <div class="display-5">الإجمالي</div>
+                        <div class="ml-auto d-flex">
+                            <div class="text-primary text-uppercase px-3">usd</div>
+                            <div class="font-weight-bold">ج.م @Model.TotalCarts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
+                    <div class="col-md-6">
+                        <a class="btn text-uppercase" href="/Customer/Home/Index">العودة للتسوق</a>
+                    </div>
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <button type="submit" class="btn btn-success" style="width:120px;height:40px">دفع</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1 pt-lg-0 pt-3">
-            <div id="cart" class="bg-white rounded">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="h6">Cart Summary</div>
-                  
-                </div>
-              
-                @foreach(var item in Model.CartsList)
-                {
-
-                     <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
-                    <div class="item pr-2">
-                        <img src="~/Images/Products/@item.Product.Image"
-                             alt="" width="80" height="80">
-                        <div class="number">@item.Count</div>
-                    </div>
-                    <div class="d-flex flex-column px-3">
-                        <b class="h5">@item.Product.Name</b>
-                    </div>
-                    <div class="ml-auto">
-                        <b class="h5">@item.Product.Price</b>
-                    </div>
-                </div>                    
-                }
-
-                <div class="d-flex align-items-center py-2">
-                    <div class="display-5">Total</div>
-                    <div class="ml-auto d-flex">
-                        <div class="text-primary text-uppercase px-3">usd</div>
-                        <div class="font-weight-bold">$@Model.TotalCarts</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
-                <div class="col-md-6">
-                    <a class="btn text-uppercase" href="/Customer/Home/Index">back to shopping</a>
-                </div>
-                <div class="col-md-6 pt-md-0 pt-3">
-                        <button type="submit" class="btn btn-success" style="width:120px;height:40px">Pay</button>
-                </div>
-            </div>
-
-        </div>
-                
     </div>
-</div>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-

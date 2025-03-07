@@ -6,22 +6,20 @@
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>E_Shop</title>
+    <title>المتجر الإلكتروني</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="~/img/logo.jpg" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/Customer/css/styles.css" rel="stylesheet" />
-
 
     <!-- Favicon -->
     <link href="~/CusHeader/img/favicon.ico" rel="icon">
@@ -57,14 +55,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="/Customer/Home/Index" class="nav-link active">
-                            <i class="fas fa-home"></i> Home
+                            <i class="fas fa-home"></i> الرئيسية
                         </a>
                     </li>
                     @if (ViewBag.Cats != null)
                     {
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                <i class="fas fa-shopping-bag"></i> Shop <i class="fa fa-angle-down mt-1"></i>
+                                <i class="fas fa-shopping-bag"></i> المتجر <i class="fa fa-angle-down mt-1"></i>
                             </a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                 @foreach (var item in ViewBag.Cats)
@@ -76,7 +74,7 @@
                     }
                     <li class="nav-item">
                         <a href="/Customer/Contact/ContactUs" class="nav-link">
-                            <i class="fas fa-envelope"></i> Contact Us
+                            <i class="fas fa-envelope"></i> اتصل بنا
                         </a>
                     </li>
                     @if (User.Identity.IsAuthenticated)
@@ -85,7 +83,7 @@
                         {
                             <li class="nav-item">
                                 <a href="/Admin/Dashboard/Index" class="nav-link">
-                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                    <i class="fas fa-tachometer-alt"></i> لوحة التحكم
                                 </a>
                             </li>
                         }
@@ -94,7 +92,7 @@
 
                 @{
                     int Count = myshop.WebApp.Areas.Customer.Controllers.CartController.countCart;
-                    
+
                     <ul class="navbar-nav ms-auto py-0">
                         <li class="nav-item">
                             <a href="/Customer/Cart/Index" class="btn px-0 ms-1">
@@ -114,25 +112,24 @@
                     </ul>
                 }
 
-               
-                 @if (User.Identity.IsAuthenticated)
-                 {
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-user-circle"></i> Account <i class="fa fa-angle-down mt-1"></i>
-                        </a>
-                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                            <a href="/Identity/Account/Manage" class="dropdown-item">Edit Profile</a>
-                            <a id="manage" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
-                        </div>
-                    </li>
-                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> الحساب <i class="fa fa-angle-down mt-1"></i>
+                            </a>
+                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                <a href="/Identity/Account/Manage" class="dropdown-item">تعديل الملف الشخصي</a>
+                                <a id="manage" class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
+                            </div>
+                        </li>
+                    </ul>
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
                     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button id="logout" type="submit" class="btn btn-outline-warning btn-sm py-2 px-4 mt-0 animate__animated animate__fadeInUp">Logout</button>
+                        <button id="logout" type="submit" class="btn btn-outline-warning btn-sm py-2 px-4 mt-0 animate__animated animate__fadeInUp">تسجيل الخروج</button>
                     </form>
                 }
             </div>
@@ -153,59 +150,40 @@
                     <div class="carousel-inner">
                         <div class="carousel-item position-relative active" style="height: 430px;">
                             <img class="position-absolute w-100 h-100" src="~/CusHeader/img/carousel-1.png" style="object-fit: cover;">
-                           @*  <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                </div>
-                            </div> *@
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
                             <img class="position-absolute w-100 h-100" src="~/CusHeader/img/carousel-5.png" style="object-fit: cover;">
-                          @* <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                </div>
-                            </div>  *@
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
                             <img class="position-absolute w-100 h-100" src="~/CusHeader/img/carousel-4.jpg" style="object-fit: cover;">
-                           @*  <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                </div>
-                            </div> *@
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
 
-             <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="~/CusHeader/img/carousel-o.jpg" alt="">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="/Customer/Home/ProductOffer?off=20" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">وفر 20%</h6>
+                        <h3 class="text-white mb-3">عرض خاص</h3>
+                        <a href="/Customer/Home/ProductOffer?off=20" class="btn btn-primary">تسوق الآن</a>
                     </div>
                 </div>
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="~/CusHeader/img/carousel-6.jpg" alt="">
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 75%</h6>
-                        <h3 class="text-white mb-3">Special Offer</h3>
-                        <a href="/Customer/Home/ProductOffer?off=75" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">وفر 75%</h6>
+                        <h3 class="text-white mb-3">عرض خاص</h3>
+                        <a href="/Customer/Home/ProductOffer?off=75" class="btn btn-primary">تسوق الآن</a>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <!-- Carousel End -->
     <!-- Section-->
     @RenderBody()
-
 
     <!-- Featured Start -->
     <div class="container-fluid pt-0">
@@ -213,25 +191,25 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                    <h5 class="font-weight-semi-bold m-0">منتجات عالية الجودة</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                    <h5 class="font-weight-semi-bold m-0">شحن مجاني</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                    <h5 class="font-weight-semi-bold m-0">إرجاع خلال 14 يوم</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                     <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                    <h5 class="font-weight-semi-bold m-0">دعم على مدار الساعة</h5>
                 </div>
             </div>
         </div>
@@ -243,27 +221,27 @@
         <div class="container-fluid bg-dark text-secondary mt-1 pt-1">
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                    <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street Tala . </p>
+                    <h5 class="text-secondary text-uppercase mb-4">تواصل معنا</h5>
+                    <p class="mb-4">نحن هنا لمساعدتك في أي استفسار أو طلب.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 شارع الطلاء</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>alabadran@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>(+02) 01000000000 </p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>(+02) 01000000000</p>
                 </div>
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                            <h5 class="text-secondary text-uppercase mb-4">روابط سريعة</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="/Customer/Home/Index"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="/Customer/Home/productListByCat?categoryId=35"><i class="fa fa-angle-right mr-2"></i>Shop Man</a>
-                                <a class="text-secondary" href="/Customer/Contact/ContactUs"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-secondary mb-2" href="/Customer/Home/Index"><i class="fa fa-angle-right mr-2"></i>الرئيسية</a>
+                                <a class="text-secondary mb-2" href="/Customer/Home/productListByCat?categoryId=35"><i class="fa fa-angle-right mr-2"></i>متجر الرجال</a>
+                                <a class="text-secondary" href="/Customer/Contact/ContactUs"><i class="fa fa-angle-right mr-2"></i>اتصل بنا</a>
                             </div>
                         </div>
 
                         <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                            <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+                            <h5 class="text-secondary text-uppercase mb-4">النشرة الإخبارية</h5>
+                            <p>اشترك في نشرتنا الإخبارية لتحصل على آخر العروض والتحديثات.</p>
+                            <h6 class="text-secondary text-uppercase mt-4 mb-3">تابعنا</h6>
                             <div class="d-flex">
                                 <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -274,18 +252,14 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- Footer End -->
-
-
-
     </footer>
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="~/Customer/js/scripts.js"></script>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

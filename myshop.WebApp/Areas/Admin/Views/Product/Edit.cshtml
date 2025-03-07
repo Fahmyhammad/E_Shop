@@ -1,7 +1,7 @@
 ﻿@model ProductViewModel
 @{
-    ViewBag.PageTitle = "Product Management";
-    ViewBag.CardTitle = "Edit Product";
+    ViewBag.PageTitle = "إدارة المنتجات";
+    ViewBag.CardTitle = "تعديل منتج";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
@@ -12,38 +12,36 @@
             <input hidden asp-for="@Model.Product.Image" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Product.Name"></label>
+                <label asp-for="Product.Name">الاسم</label>
                 <input asp-for="Product.Name" class="form-control" />
                 <span asp-validation-for="Product.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Product.Description"></label>
-                <textarea asp-for="Product.Description" class="form-control" ></textarea>
+                <label asp-for="Product.Description">الوصف</label>
+                <textarea asp-for="Product.Description" class="form-control"></textarea>
                 <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Product.Price"></label>
+                <label asp-for="Product.Price">السعر</label>
                 <input asp-for="Product.Price" class="form-control" />
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Product.Image" class="control-label"></label>
+                <label asp-for="Product.Image" class="control-label">الصورة</label>
                 <input type="file" value="~/Images/Products/@Model.Product.Image" asp-for="file" class="form-control" onchange="loadFile(event)" />
                 <img id="MyImage" class="img-thumbnail" style="width:400px; height:200px;" />
                 <span asp-validation-for="Product.Image" class="text-danger"></span>
-                
             </div>
             <div class="mb-3">
-                <label asp-for="Product.CategoryId"></label>
+                <label asp-for="Product.CategoryId">الفئة</label>
                 <select asp-for="Product.CategoryId" class="form-control" asp-items="Model.CategoryList">
-                    <option disabled selected>--Select Category--</option>
+                    <option disabled selected>--اختر فئة--</option>
                 </select>
             </div>
             <div class="mb-3">
-                <button type="submit" asp-area="Admin" asp-controller="Product" asp-action="Edit" class="btn btn-outline-success" style="width:120px;height:40px">Save</button> ||
-                <a class="btn btn-outline-danger" style="width:120px;height:40px" asp-area="Admin" asp-action="Index" asp-controller="Product">Go To Home</a>
+                <button type="submit" asp-area="Admin" asp-controller="Product" asp-action="Edit" class="btn btn-outline-success" style="width:120px;height:40px">حفظ</button> ||
+                <a class="btn btn-outline-danger" style="width:120px;height:40px" asp-area="Admin" asp-action="Index" asp-controller="Product">العودة للقائمة</a>
             </div>
-
         </form>
     </div>
     <div class="col-md-4">
@@ -51,15 +49,12 @@
             <img id="MyImage" src="~/Images/Products/@Model.Product.Image" width="300px" height="300px" />
         </div>
     </div>
-
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-
         var loadFile = function (event) {
             var reader = new FileReader();
             reader.onload = function () {
@@ -68,7 +63,5 @@
             }
             reader.readAsDataURL(event.target.files[0]);
         }
-
     </script>
-
 }

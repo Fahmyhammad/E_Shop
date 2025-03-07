@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Product>
 
-
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -9,22 +8,25 @@
             {
                 <div class="col mb-5">
                     <div class="card h-100">
-                        <!-- Product image-->
+                        <!-- صورة المنتج -->
+                        <a href="\Customer\Home\Details?Productid=@item.Id">
+                            <img class="card-img-top" src="~/Images/Products/@item.Image" alt="..." width="450px" height="300px" />
+                        </a>
 
-                        <a href="\Customer\Home\Details?Productid=@item.Id"><img class="card-img-top" src="~/Images/Products/@item.Image" alt="..." width=450px height=300px /></a>
-
-                        <!-- Product details-->
+                        <!-- تفاصيل المنتج -->
                         <div class="card-body p-4">
                             <div class="text-center">
-                                <!-- Product name-->
+                                <!-- اسم المنتج -->
                                 <h5 class="fw-bolder">@item.Name</h5>
-                                <!-- Product price-->
-                                $@item.Price
+                                <!-- سعر المنتج -->
+                                ج.م @item.Price
                             </div>
                         </div>
-                        <!-- Product actions-->
+                        <!-- إجراءات المنتج -->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="\Customer\Home\Details?Productid=@item.Id">View Details</a></div>
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto" href="\Customer\Home\Details?Productid=@item.Id">عرض التفاصيل</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -33,7 +35,3 @@
         </div>
     </div>
 </section>
-
-
-
-

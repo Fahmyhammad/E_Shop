@@ -1,7 +1,7 @@
 ﻿@model Category
 @{
-    ViewBag.PageTitle = "Category Management";
-    ViewBag.CardTitle = "Create Category";
+    ViewBag.PageTitle = "إدارة الفئات";
+    ViewBag.CardTitle = "إنشاء فئة";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
@@ -9,31 +9,24 @@
     <div class="col-md-4">
         <form method="post">
             <div class="mb-3">
-                <label asp-for="Name"></label>
+                <label asp-for="Name">الاسم</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description"></label>
-                <textarea id="#textarea" asp-for="Description" class="form-control"></textarea>
+                <label asp-for="Description">الوصف</label>
+                <textarea  asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-outline-success" style="width:120px;height:40px">Save</button> ||
-                <a class="btn btn-outline-danger" style="width:120px;height:40px" asp-action="Index" asp-controller="Category">Go To Home</a>
+                <button type="submit" class="btn btn-outline-success" style="width:120px;height:40px">حفظ</button> ||
+                <a class="btn btn-outline-danger" style="width:120px;height:40px" asp-action="Index" asp-controller="Category">العودة للقائمة</a>
             </div>
-
         </form>
     </div>
 </div>
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
 }
-<script>
-    tinymce.init({
-        selector: '#textarea'
-    });
-</script>
+

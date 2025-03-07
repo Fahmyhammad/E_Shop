@@ -1,7 +1,7 @@
-﻿@model AppUser;
+﻿@model AppUser
 @{
-    ViewBag.PageTitle = "Users Management";
-    ViewBag.CardTitle = "Delete User";
+    ViewBag.PageTitle = "إدارة المستخدمين";
+    ViewBag.CardTitle = "حذف مستخدم";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
@@ -11,23 +11,23 @@
             <input hidden asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Name"></label>
+                <label asp-for="Name">الاسم</label>
                 <input asp-for="Name" disabled class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Email"></label>
+                <label asp-for="Email">البريد الإلكتروني</label>
                 <input asp-for="Email" disabled class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Address"></label>
+                <label asp-for="Address">العنوان</label>
                 <input asp-for="Address" disabled class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <button type="submit" asp-area="Admin" asp-action="DeleteUsers" asp-controller="Users" class="btn btn-outline-danger" style="width:120px; height:40px;">Delete</button> ||
-                <a asp-action="Index" asp-controller="Users" class="btn btn-outline-success" style="width:120px; height:40px;">Go To Home</a>
+                <button type="submit" asp-area="Admin" asp-action="DeleteUsers" asp-controller="Users" class="btn btn-outline-danger" style="width:120px; height:40px;">حذف</button> ||
+                <a asp-action="Index" asp-controller="Users" class="btn btn-outline-success" style="width:120px; height:40px;">العودة للقائمة</a>
             </div>
         </form>
     </div>

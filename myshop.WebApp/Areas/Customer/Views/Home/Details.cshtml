@@ -1,13 +1,13 @@
 ﻿@model ShoppingCardModel
 
-<title>Details</title>
+<title>تفاصيل المنتج</title>
 <form method="post" asp-action="Details" enctype="multipart/form-data">
-   
+
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <input hidden asp-for="ProductId" />
-                 <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="~/Images/Products/@Model.Product.Image " alt="..." width="400" height="500" /></div>
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="~/Images/Products/@Model.Product.Image " alt="..." width="400" height="500" /></div>
                 <div class="col-md-6">
                     <div class="small mb-1">@Model.Product.Category.Name</div>
                     <h1 class="display-5 fw-bolder">@Model.Product.Name</h1>
@@ -20,13 +20,12 @@
                         <input class="form-control text-center me-3" id="inputQuantity" asp-for="Count" style="max-width: 4rem" />
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                             <i class="bi-cart-fill me-1"></i>
-                            Add to cart
+                            أضف إلى السلة
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-  
-</form>
 
+</form>

@@ -5,11 +5,11 @@
 <h1>@ViewData["Title"]</h1>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>تسجيل حساب جديد</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
@@ -44,30 +44,30 @@
 
             <div class="col-md-6">
                 <div class="card p-4 shadow">
-                    <h2 class="text-center mb-4">Create an account</h2>
+                    <h2 class="text-center mb-4">إنشاء حساب جديد</h2>
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                         <div class="mb-3">
-                            <label asp-for="Input.Name" class="form-label">Name</label>
+                            <label asp-for="Input.Name" class="form-label">الاسم</label>
                             <input asp-for="Input.Name" type="text" class="form-control" required>
                             <span asp-validation-for="Input.Name" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Input.Address" class="form-label">Address</label>
+                            <label asp-for="Input.Address" class="form-label">العنوان</label>
                             <input asp-for="Input.Address" type="text" class="form-control" required>
                             <span asp-validation-for="Input.Address" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Input.City" class="form-label">City</label>
+                            <label asp-for="Input.City" class="form-label">المدينة</label>
                             <input asp-for="Input.City" type="text" class="form-control" required>
                             <span asp-validation-for="Input.City" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Input.Email" class="form-label">Email</label>
+                            <label asp-for="Input.Email" class="form-label">البريد الإلكتروني</label>
                             <input asp-for="Input.Email" type="email" class="form-control" required>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="mb-3 position-relative">
-                            <label asp-for="Input.Password" class="form-label">Password</label>
+                            <label asp-for="Input.Password" class="form-label">كلمة المرور</label>
                             <input id="password" asp-for="Input.Password" type="password" class="form-control" required>
                             <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword('password', 'eyeIcon1')">
                                 <i id="eyeIcon1" class="fa fa-eye"></i>
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="mb-3 position-relative">
-                            <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
+                            <label asp-for="Input.ConfirmPassword" class="form-label">تأكيد كلمة المرور</label>
                             <input id="confirmPassword" asp-for="Input.ConfirmPassword" type="password" class="form-control" required>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword('confirmPassword', 'eyeIcon2')">
@@ -87,7 +87,7 @@
                         @if (User.IsInRole(SD.AdminRole))
                         {
                             <div class="mb-3">
-                                <label class="form-label">Role</label>
+                                <label class="form-label">الدور</label>
                                 <div>
                                     <input type="radio" value="@SD.AdminRole" name="RoleRadio" /> @SD.AdminRole
                                     <input type="radio" value="@SD.EditorRole" name="RoleRadio" /> @SD.EditorRole
@@ -96,16 +96,16 @@
                             </div>
                         }
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-lg btn-yellow">Register</button>
+                            <button type="submit" class="btn btn-lg btn-yellow">تسجيل</button>
                         </div>
                         <p class="text-center text-muted mt-3">
-                            Have an account? <a href="/Identity/Account/Login" class="text-white fw-bold">Login here</a>
+                            لديك حساب بالفعل؟ <a href="/Identity/Account/Login" class="text-white fw-bold">سجل الدخول هنا</a>
                         </p>
                     </form>
                 </div>
             </div>
             <div class="col-md-6 d-none d-md-block">
-                <img src="~/img/honey-1958464_1280.jpg" alt="Register image" class="img-fluid rounded" style="height: 100%; object-fit: cover;">
+                <img src="~/img/honey-1958464_1280.jpg" alt="صورة التسجيل" class="img-fluid rounded" style="height: 100%; object-fit: cover;">
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-                function togglePassword(inputId, iconId) {
+        function togglePassword(inputId, iconId) {
             var passwordInput = document.getElementById(inputId);
             var eyeIcon = document.getElementById(iconId);
 
@@ -130,15 +130,13 @@
                 eyeIcon.classList.add("fa-eye");
             }
         }
-
     </script>
 }
-
 
 <style>
     .toggle-password {
         position: absolute;
-        right: 10px;
+        left: 10px; /* تغيير اليمين إلى اليسار للتوافق مع الاتجاه العربي */
         top: 70%;
         transform: translateY(-50%);
         background: transparent;
@@ -151,5 +149,4 @@
             font-size: 18px;
             color: #666;
         }
-
 </style>
