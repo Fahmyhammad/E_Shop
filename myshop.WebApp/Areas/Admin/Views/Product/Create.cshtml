@@ -25,6 +25,11 @@
                     <span asp-validation-for="Product.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
+                    <label asp-for="Product.BeforeDiscount">السعر قبل الخصم</label>
+                    <input asp-for="Product.BeforeDiscount" class="form-control" />
+                    <span asp-validation-for="Product.BeforeDiscount" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
                     <label asp-for="Product.Image" class="form-label">الصورة</label>
                     <input type="file" asp-for="file" required class="form-control" onchange="loadFile(event)" />
                     <img id="MyImage" class="img-thumbnail mt-2" style="max-width: 50%; height: auto;" />

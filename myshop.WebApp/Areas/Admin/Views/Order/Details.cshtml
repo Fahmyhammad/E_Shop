@@ -130,7 +130,7 @@
                                             <small class="text-muted">الكمية: @item.Count</small>
                                         </div>
                                         <div class="col-4 text-end">
-                                            <p class="text-success">@((item.Count * item.Price).ToString("c"))</p>
+                                            <p class="text-success">@((item.Count * item.Price).ToString()) ج.م</p>
                                         </div>
                                     </div>
                                 </li>
@@ -141,7 +141,7 @@
                                         <h5 class="text-white">الإجمالي</h5>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <h5 class="text-white">@Model.OrderHeader.TotalPrice.ToString("c")</h5>
+                                        <h5 class="text-white">@Model.OrderHeader.TotalPrice.ToString() ج.م</h5>
                                     </div>
                                 </div>
                             </li>

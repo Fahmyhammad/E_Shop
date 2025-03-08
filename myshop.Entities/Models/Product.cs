@@ -24,6 +24,7 @@ namespace myshop.Entities.Models
         public string Image { get; set; }
         [Required]
         public decimal Price {  get; set; }
+        public decimal? BeforeDiscount {  get; set; }
         [Required]
         [DisplayName("Category")]
         public int CategoryId {  get; set; }

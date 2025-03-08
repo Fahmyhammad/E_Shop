@@ -75,6 +75,7 @@ namespace myshop.WebApp.Areas.Admin.Controllers
                     Name = model.Product.Name,
                     Description = model.Product.Description,
                     Price = model.Product.Price,
+                    BeforeDiscount = model.Product.BeforeDiscount,
                     Image = model.Product.Image,
                     CategoryId = model.Product.CategoryId,
                     
