@@ -22,11 +22,38 @@ namespace myshop.WebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             IEnumerable<OrderHeader> orderHeaders;
-            orderHeaders = _unitOfWork.OrderHeader.GetAll(IncludeWord: "AppUser");
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x=>x.OrderStatus == SD.Approve ,IncludeWord: nameof(AppUser));
             return View(orderHeaders);
 
         }
+        public IActionResult OrdersProccessing()
+        {
+            IEnumerable<OrderHeader> orderHeaders;
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x => x.OrderStatus == SD.Proccessing, IncludeWord: nameof(AppUser));
+            return View(orderHeaders);
 
+        }
+        public IActionResult OrdersCancelled()
+        {
+            IEnumerable<OrderHeader> orderHeaders;
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x => x.OrderStatus == SD.Cancelled, IncludeWord: nameof(AppUser));
+            return View(orderHeaders);
+
+        }
+        public IActionResult OrdersShipped()
+        {
+            IEnumerable<OrderHeader> orderHeaders;
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x => x.OrderStatus == SD.Shipped, IncludeWord: nameof(AppUser));
+            return View(orderHeaders);
+
+        }
+        public IActionResult OrdersPending()
+        {
+            IEnumerable<OrderHeader> orderHeaders;
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x => x.OrderStatus == "Pending", IncludeWord: nameof(AppUser));
+            return View(orderHeaders);
+
+        }
         public IActionResult Details(int orderid)
         {
             OrderViewModel orderVM = new OrderViewModel()
