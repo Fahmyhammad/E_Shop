@@ -58,6 +58,11 @@
                             <i class="fas fa-home"></i> الرئيسية
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/Customer/Home/ProductOffer" class="nav-link active">
+                            <i class="fas fa-percent"></i> العروض
+                        </a>
+                    </li>
                     @if (ViewBag.Cats != null)
                     {
                         <li class="nav-item dropdown">
@@ -91,25 +96,44 @@
                 </ul>
 
                 @{
-                    int Count = myshop.WebApp.Areas.Customer.Controllers.CartController.countCart;
+                    // int Count = myshop.WebApp.Areas.Customer.Controllers.CartController.countCart;
 
                     <ul class="navbar-nav ms-auto py-0">
                         <li class="nav-item">
                             <a href="/Customer/Cart/Index" class="btn px-0 ms-1">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-dark border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                    @if (Count > 0)
-                                    {
-                                        @Count
-                                    }
-                                    else
-                                    {
-                                        <span class="text-dark">0</span>
-                                    }
-                                </span> ||
+                                <span id="cart-count" class="badge text-dark border border-secondary rounded-circle" style="padding-bottom: 2px;">
+                                    <!-- القيمة الافتراضية -->
+                                    0
+                                </span>
                             </a>
                         </li>
                     </ul>
+
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            function updateCartCount() {
+                                $.ajax({
+                                    url: '/Customer/Cart/GetCartCount', // نقطة النهاية
+                                    type: 'GET',
+                                    success: function (response) {
+                                        // تحديث العدد في عنصر HTML
+                                        $('#cart-count').text(response.count);
+                                    },
+                                    error: function () {
+                                        console.error('حدث خطأ أثناء جلب عدد العناصر في السلة.');
+                                    }
+                                });
+                            }
+
+                            // تحديث العدد كل 5 ثوانٍ
+                            setInterval(updateCartCount, 5000);
+
+                            // تحديث العدد فور تحميل الصفحة
+                            updateCartCount();
+                        });
+                    </script>
                 }
 
                 @if (User.Identity.IsAuthenticated)
@@ -167,7 +191,7 @@
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">وفر 20%</h6>
                         <h3 class="text-white mb-3">عرض خاص</h3>
-                        <a href="/Customer/Home/ProductOffer?off=20" class="btn btn-primary">تسوق الآن</a>
+                        <a href="/Customer/Home/ProductOffer" class="btn btn-primary">تسوق الآن</a>
                     </div>
                 </div>
                 <div class="product-offer mb-30" style="height: 200px;">
@@ -175,7 +199,7 @@
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">وفر 75%</h6>
                         <h3 class="text-white mb-3">عرض خاص</h3>
-                        <a href="/Customer/Home/ProductOffer?off=75" class="btn btn-primary">تسوق الآن</a>
+                        <a href="/Customer/Home/ProductOffer" class="btn btn-primary">تسوق الآن</a>
                     </div>
                 </div>
             </div>
@@ -185,35 +209,7 @@
     <!-- Section-->
     @RenderBody()
 
-    <!-- Featured Start -->
-    <div class="container-fluid pt-0">
-        <div class="row px-xl-2 ">
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                    <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">منتجات عالية الجودة</h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                    <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                    <h5 class="font-weight-semi-bold m-0">شحن مجاني</h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                    <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">إرجاع خلال 14 يوم</h5>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                    <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0">دعم على مدار الساعة</h5>
-                </div>
-            </div>
-        </div>
-    </div>
+  
     <!-- Featured End -->
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -223,7 +219,7 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">تواصل معنا</h5>
                     <p class="mb-4">نحن هنا لمساعدتك في أي استفسار أو طلب.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 شارع الطلاء</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>طريق طنطا اسكندرية السريع</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>alabadran@gmail.com</p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>(+02) 01000000000</p>
                 </div>
@@ -233,7 +229,7 @@
                             <h5 class="text-secondary text-uppercase mb-4">روابط سريعة</h5>
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-secondary mb-2" href="/Customer/Home/Index"><i class="fa fa-angle-right mr-2"></i>الرئيسية</a>
-                                <a class="text-secondary mb-2" href="/Customer/Home/productListByCat?categoryId=35"><i class="fa fa-angle-right mr-2"></i>متجر الرجال</a>
+                                <a class="text-secondary mb-2" href="/Customer/Home/ProductOffer"><i class="fa fa-angle-right mr-2"></i>العروض</a>
                                 <a class="text-secondary" href="/Customer/Contact/ContactUs"><i class="fa fa-angle-right mr-2"></i>اتصل بنا</a>
                             </div>
                         </div>
@@ -243,9 +239,7 @@
                             <p>اشترك في نشرتنا الإخبارية لتحصل على آخر العروض والتحديثات.</p>
                             <h6 class="text-secondary text-uppercase mt-4 mb-3">تابعنا</h6>
                             <div class="d-flex">
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
                                 <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>

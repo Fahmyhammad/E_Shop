@@ -26,6 +26,8 @@ namespace myshop.DataAccess.Implementation
                 result.Name = product.Name;
                 result.Description = product.Description;
                 result.Price = product.Price;
+                result.BeforeDiscount = product.BeforeDiscount;
+                result.Offer = product.Offer;
                 result.Image = product.Image==null? result.Image:product.Image;
                 result.CategoryId = product.CategoryId;
             }

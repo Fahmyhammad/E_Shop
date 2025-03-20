@@ -21,7 +21,14 @@ namespace myshop.WebApp.Areas.Customer.Controllers
         public CartController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            countCart = _unitOfWork.ShoppingCart.GetAll().Count();
+          //  countCart = _unitOfWork.ShoppingCart.GetAll().Count();
+        }
+
+        [HttpGet]
+        public IActionResult GetCartCount()
+        {
+            int count = _unitOfWork.ShoppingCart.GetAll().Count();
+            return Json(new { count });
         }
         public IActionResult Index()
         {
@@ -190,7 +197,7 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                             Currency = "usd",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
-                                Name = item.Product.Name,
+                                Name = item.Product.Name,                                
                             },
                         },
                         Quantity = item.Count,

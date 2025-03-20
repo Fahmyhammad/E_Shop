@@ -2,6 +2,8 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core.Common
+@using myshop.Entities.Repository
+@inject IUnitOfWork _unitOfWork;
 
 <section class="py-5">
     <div class="container px-4 px-lg-0 mt-5">
@@ -10,20 +12,34 @@
             @foreach (var item in Model)
             {
                 <div class="col mb-3">
-                    <div class="card h-100">
+                    <div class="card h-100 position-relative">
+                        <!-- Discount badge -->
+                        @if (item.Offer > 0)
+                        {
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">خصم @item.Offer%</span>
+                        }
+
                         <!-- Product image-->
                         <a href="\Customer\Home\Details?Productid=@item.Id">
                             <img class="card-img-top" src="~/Images/Products/@item.Image" alt="..." width="450px" height="300px" />
                         </a>
+
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">@item.Name</h5>
                                 <!-- Product price-->
-                                ج.م @item.Price
+                                <div class="d-flex justify-content-center align-items-center">
+                                    @if (item.BeforeDiscount > 0)
+                                    {
+                                        <span class="text-muted me-2"><del>ج.م @item.BeforeDiscount</del></span>
+                                    }
+                                    <span class="text-danger fw-bold">ج.م @item.Price</span>
+                                </div>
                             </div>
                         </div>
+
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center">
@@ -34,6 +50,7 @@
                 </div>
             }
 
+            <!-- Pagination -->
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }),
@@ -46,4 +63,72 @@
             </div>
         </div>
     </div>
+
+    <!-- Offers Section -->
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="text-center mb-4">العروض الحالية</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            @foreach (var item in _unitOfWork.Products.GetAll(f => f.Offer > 0).OrderByDescending(p => p.Id).Take(4))
+            {
+                <div class="col mb-3">
+                    <div class="card h-100 position-relative">
+                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">خصم % @item.Offer</span>
+
+                        <a href="\Customer\Home\Details?Productid=@item.Id">
+                            <img class="card-img-top" src="~/Images/Products/@item.Image" alt="..." width="450px" height="300px" />
+                        </a>
+
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">@item.Name</h5>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <span class="text-muted me-2"><del>ج.م @item.Price</del></span>
+                                    <span class="text-danger fw-bold">
+                                        ج.م @((item.Price - (item.Price * (item.Offer ?? 0) / 100)).ToString("F2"))
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto" href="\Customer\Home\Details?Productid=@item.Id">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+   
 </section>
+<!-- Featured Start -->
+<div class="container-fluid pt-0">
+    <div class="row px-xl-2 ">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">منتجات عالية الجودة</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                <h5 class="font-weight-semi-bold m-0">شحن مجاني</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">إرجاع خلال 14 يوم</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">دعم على مدار الساعة</h5>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,10 +12,19 @@
                     <div class="small mb-1">@Model.Product.Category.Name</div>
                     <h1 class="display-5 fw-bolder">@Model.Product.Name</h1>
                     <div class="fs-5 mb-5">
-                        @if (@Model.Product.BeforeDiscount != null){
-                        <span class="text-decoration-line-through">@Model.Product.BeforeDiscount</span>
+                        @if (Model.Product.Offer > 0 ){
+                            <span class="text-muted me-2"><del>ج.م @Model.Product.Price.ToString("F2")</del></span>
+                            <span class="text-danger fw-bold">
+                                ج.م @((Model.Product.Price - (Model.Product.Price * (Model.Product.Offer ?? 0) / 100)).ToString("F2"))
+                            </span>
                         }
-                        <span class="text-dark">ج.م @Model.Product.Price</span>
+                        else{
+                            if(Model.Product.BeforeDiscount >0){
+                                <span class="text-decoration-line-through">ج.م @Model.Product.BeforeDiscount</span>
+                            }
+                            <span class="text-dark">ج.م @Model.Product.Price</span>
+                        }
+                      
                     </div>
                     <p class="lead">@Model.Product.Description</p>
                     <div class="d-flex">

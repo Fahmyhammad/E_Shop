@@ -25,6 +25,8 @@ namespace myshop.Entities.Models
         [Required]
         public decimal Price {  get; set; }
         public decimal? BeforeDiscount {  get; set; }
+        public decimal? Offer {  get; set; }
+
         [Required]
         [DisplayName("Category")]
         public int CategoryId {  get; set; }

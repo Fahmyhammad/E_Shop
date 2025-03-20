@@ -31,6 +31,7 @@
                     <th scope="col">السعر</th>
                     <th scope="col">السعر قبل الخصم</th>
                     <th scope="col">الصورة</th>
+                    <th scope="col">العرض</th>
                     <th scope="col">الفئة</th>
                     <th scope="col">الأحداث</th>
                 </tr>
@@ -46,6 +47,12 @@
                         <td>
                             <img src="~/Images/Products/@item.Image" class="img-thumbnail" style="width: 60px; height: 50px;" />
                         </td>
+                        @if(item.Offer == null || item.Offer == 0){
+                        <td>اصل المنتج.</td>
+                        }
+                        else{
+                        <td>@item.Offer</td>
+                        }
                         <td>@item.Category.Name</td>
                         <td>
                             <a href="/Admin/Product/Edit/@item.Id" class="btn btn-outline-success btn-sm">تعديل</a>

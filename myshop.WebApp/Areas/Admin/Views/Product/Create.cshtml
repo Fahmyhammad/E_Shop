@@ -21,13 +21,18 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.Price" class="form-label">السعر</label>
-                    <input asp-for="Product.Price" class="form-control" />
+                    <input asp-for="Product.Price" type="number" class="form-control" />
                     <span asp-validation-for="Product.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.BeforeDiscount">السعر قبل الخصم</label>
-                    <input asp-for="Product.BeforeDiscount" class="form-control" />
+                    <input asp-for="Product.BeforeDiscount" type="number" class="form-control" />
                     <span asp-validation-for="Product.BeforeDiscount" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Offer">العرض</label>
+                    <input asp-for="Product.Offer" type="number" class="form-control" />
+                    <span asp-validation-for="Product.Offer" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.Image" class="form-label">الصورة</label>

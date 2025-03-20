@@ -3,28 +3,35 @@
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="text-center mb-4">العروض الحالية</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             @foreach (var item in Model)
             {
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
+                <div class="col mb-3">
+                    <div class="card h-100 position-relative">
+                        <span class="badge bg-danger position-absolute top-0 start-0 m-2">خصم % @item.Offer</span>
 
-                        <a href="\Customer\Home\Details?Productid=@item.Id"><img class="card-img-top" src="~/Images/Products/@item.Image" alt="..." width=450px height=300px /></a>
+                        <a href="\Customer\Home\Details?Productid=@item.Id">
+                            <img class="card-img-top" src="~/Images/Products/@item.Image" alt="..." width="450px" height="300px" />
+                        </a>
 
-                        <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
-                                <!-- Product name-->
                                 <h5 class="fw-bolder">@item.Name</h5>
-                                <!-- Product price-->
-                                ج.م @item.Price
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <span class="text-muted me-2"><del>ج.م @item.Price</del></span>
+                                    <span class="text-danger fw-bold">
+                                        ج.م @((item.Price - (item.Price * (item.Offer ?? 0) / 100)).ToString("F2"))
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <!-- Product actions-->
+
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="\Customer\Home\Details?Productid=@item.Id">عرض التفاصيل</a></div>
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto" href="\Customer\Home\Details?Productid=@item.Id">عرض التفاصيل</a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ namespace myshop.WebApp.Areas.Customer.Controllers
             var pageNumber = page ?? 1;
             int PageSize = 8;
 
-            var products = _unitOfWork.Products.GetAll().ToPagedList(pageNumber , PageSize);
+            var products = _unitOfWork.Products.GetAll(x=>x.Offer == null || x.Offer== 0).ToPagedList(pageNumber , PageSize);
             return View(products);
         }
         [HttpGet]
@@ -103,18 +103,20 @@ namespace myshop.WebApp.Areas.Customer.Controllers
             return View(viewModel.Products);
         }
 
-        public IActionResult ProductOffer(int off)
+        public IActionResult ProductOffer(int? page)
         {
-            if (off == 20)
+            var viewModel = new MainLayoutViewModel
             {
-                return View(_unitOfWork.Products.GetAll().Where(x => x.Price <= 900));
-            }
-            else if(off == 70)
-            {
-                return View(_unitOfWork.Products.GetAll().Where(x => x.Price <= 500));
-            }
-            else
-                return View(_unitOfWork.Products.GetAll());
+                Categories = _unitOfWork.Category.GetAll().ToList()
+            };
+            ViewBag.Cats = viewModel.Categories;
+
+
+            var pageNumber = page ?? 1;
+            int PageSize = 8;
+
+            var products = _unitOfWork.Products.GetAll().Where(x=>x.Offer > 0).ToPagedList(pageNumber, PageSize);
+            return View(products);
         }
 	}
 }

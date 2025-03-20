@@ -32,6 +32,11 @@
                 <span asp-validation-for="Product.BeforeDiscount" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="Product.Offer">العرض</label>
+                <input asp-for="Product.Offer" class="form-control" />
+                <span asp-validation-for="Product.Offer" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="Product.Image" class="control-label">الصورة</label>
                 <input type="file" value="~/Images/Products/@Model.Product.Image" asp-for="file" class="form-control" onchange="loadFile(event)" />
                 <img id="MyImage" class="img-thumbnail" style="width:400px; height:200px;" />
