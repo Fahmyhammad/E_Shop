@@ -25,7 +25,7 @@ namespace myshop.DataAccess.Implementation
             _dbSet.Add(entity);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? perdicate = null, string? IncludeWord = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? perdicate = null, string? IncludeWord = null, string? IncludeWord2 = null)
         {
             IQueryable<T> query = _dbSet;
             if(perdicate != null)
@@ -35,6 +35,13 @@ namespace myshop.DataAccess.Implementation
             if(IncludeWord != null)
             {
                 foreach(var item in IncludeWord.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(item);
+                }
+            }
+            if (IncludeWord2 != null)
+            {
+                foreach (var item in IncludeWord2.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(item);
                 }

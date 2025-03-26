@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OrderHeader>
+@{
+    ViewBag.PageTitle = "إدارة العروض";
+    ViewBag.CardTitle = "عرض الطلبات";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-12">
+            <form class="form-inline" asp-area="Admin" asp-action="Search" asp-controller="Order">
+                <div class="input-group" style="width: 100%;">
+                    <input class="form-control" type="search" placeholder="بحث" name="order" style="flex: 1;">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-outline-primary py-1 px-4">بحث</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">الرقم</th>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">رقم الهاتف</th>
+                    <th scope="col">البريد الإلكتروني</th>
+                    <th scope="col">العرض</th>
+                    <th scope="col">حالة الطلب</th>
+                    <th scope="col">إجمالي الطلب</th>
+                    <th scope="col">التفاصيل</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.AppUser.Email</td>
+                        <td>%@item.Product.Offer</td>
+                        <td>@item.OrderStatus</td>
+                        <td>@item.TotalPrice</td>
+                        <td>
+                            <a class="btn btn-outline-success btn-sm" href="/Admin/Order/Details?orderId=@item.Id">التفاصيل</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

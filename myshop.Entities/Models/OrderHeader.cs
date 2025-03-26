@@ -15,7 +15,9 @@ namespace myshop.Entities.Models
         public string AppUserId { get; set; }
         [ValidateNever]
         public AppUser AppUser { get; set; }
-
+        [ValidateNever]
+        public Product Product { get; set; }
+        public int? ProductId { get; set; }
         public DateTime OrderDate {  get; set; }
 
         public DateTime ShoppingDate { get; set; }

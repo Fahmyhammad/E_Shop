@@ -43,7 +43,9 @@
                                         <div class="product">
                                             <div class="row border-top border-bottom">
                                                 <div class="row main align-items-center">
-                                                    <div class="col-2"><img class="img-fluid" src="~/Images/Products/@item.Product.Image"></div>
+                                                    <div class="col-2">
+                                                        <img class="img-fluid" src="~/Images/Products/@item.Product.Image">
+                                                    </div>
                                                     <div class="col">
                                                         <div class="row text-muted">@item.Product.Name</div>
                                                         <div class="row">@item.Product.Description</div>
@@ -53,20 +55,35 @@
                                                         <span style="margin:4px">@item.Count</span>
                                                         <a class="btn btn-outline-primary btn-sm" style="width:1px; height:30px;" asp-action="Minus" asp-route-cartid="@item.Id">-</a>
                                                     </div>
-                                                    <div class="col">ج.م @item.Product.Price <a asp-action="Delete" asp-route-cartid="@item.Id" class="close">&#10005;</a></div>
+                                                    <div class="col">
+                                                        ج.م
+                                                        @if (item.Product.Offer > 0)
+                                                        {
+                                                            <span style=" font-weight: bold;">
+                                                                @(item.Product.Offer > 0 ? (item.Product.Price - (item.Product.Price * (item.Product.Offer ?? 0) / 100)).ToString("F2"): item.Product.Price)
+                                                                    </span>
+                                                            <span class="badge bg-danger">% عرض @item.Product.Offer</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@item.Product.Price</span>
+                                                        }
+                                                        <a asp-action="Delete" asp-route-cartid="@item.Id" class="close">&#10005;</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <br />
                                         </div>
                                     }
+
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <div class="summary">
                                     <h3>ملخص الطلب</h3>
-                                    <div class="summary-item"><span class="text">الإجمالي: </span><span class="price">ج.م @Model.TotalCarts.ToString()</span></div>
+                                    <div class="summary-item"><span class="text">الإجمالي: </span><span class="price">ج.م @Model.TotalCarts.ToString("F2")</span></div>
                                     <br />
-                                    @if (Model.TotalCarts.ToString() != "0")
+                                    @if (Model.TotalCarts != 0)
                                     {
                                         <a href="\Customer\Cart\Summary" class="btn btn-outline-primary btn-lg btn-block">الدفع</a>
 

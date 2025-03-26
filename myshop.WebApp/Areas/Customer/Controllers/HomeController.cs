@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using myshop.DataAccess.Implementation;
 using myshop.Entities.Models;
 using myshop.Entities.Repository;
 using myshop.Entities.ViewModels;
-using myshop.myshop.DataAccess.Data;
 using myshop.Utilities;
-using Stripe.Issuing;
-using System.Drawing.Printing;
 using System.Security.Claims;
 using X.PagedList;
 

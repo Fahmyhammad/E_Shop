@@ -9,7 +9,7 @@ namespace myshop.Entities.Repository
 {
     public interface IGenericRepoistory<T> where T : class
     {
-        IEnumerable<T> GetAll(Expression<Func<T,bool>>? perdicate = null , string? IncludeWord = null);
+        IEnumerable<T> GetAll(Expression<Func<T,bool>>? perdicate = null , string? IncludeWord = null, string? IncludeWord2 = null);
         T GetById(Expression<Func<T, bool>>? perdicate = null, string? IncludeWord = null);
         void Add(T entity);
         void Remove(T entity);

@@ -5,6 +5,7 @@ using myshop.Entities.Repository;
 using myshop.Entities.ViewModels;
 using myshop.Utilities;
 using Stripe;
+using Stripe.Climate;
 
 namespace myshop.WebApp.Areas.Admin.Controllers
 {
@@ -22,7 +23,7 @@ namespace myshop.WebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             IEnumerable<OrderHeader> orderHeaders;
-            orderHeaders = _unitOfWork.OrderHeader.GetAll(x=>x.OrderStatus == SD.Approve ,IncludeWord: nameof(AppUser));
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x=>x.OrderStatus == SD.Approve &&  x.Product.Offer == null  ,IncludeWord: nameof(AppUser), "Product");
             return View(orderHeaders);
 
         }
@@ -51,6 +52,15 @@ namespace myshop.WebApp.Areas.Admin.Controllers
         {
             IEnumerable<OrderHeader> orderHeaders;
             orderHeaders = _unitOfWork.OrderHeader.GetAll(x => x.OrderStatus == "Pending", IncludeWord: nameof(AppUser));
+            return View(orderHeaders);
+
+        }
+        public IActionResult OrdersOffers()
+        {
+            IEnumerable<OrderHeader> orderHeaders;
+
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(x => x.Product.Offer > 0, IncludeWord: $"Product","AppUser");
+           
             return View(orderHeaders);
 
         }

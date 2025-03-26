@@ -36,20 +36,33 @@ namespace myshop.WebApp.Areas.Customer.Controllers
             {
                 Categories = _unitOfWork.Category.GetAll().ToList()
             };
-
             ViewBag.Cats = viewModel.Categories;
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var claim = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim == null)
+            {
+                return RedirectToAction("Login", "Account"); // تأكيد تسجيل الدخول
+            }
 
             CartView = new ShoppingCartView()
             {
-                CartsList = _unitOfWork.ShoppingCart.GetAll(x => x.AppUserId == claim.Value, "Product")
+                CartsList = _unitOfWork.ShoppingCart.GetAll(x => x.AppUserId == claim.Value, "Product") ?? new List<ShoppingCardModel>()
             };
+
+            CartView.OrderHeader = CartView.OrderHeader ?? new OrderHeader(); // ضمان التهيئة
 
             foreach (var item in CartView.CartsList)
             {
-                CartView.TotalCarts += (item.Count * item.Product.Price);
+                if (item?.Product == null) continue; // تجنب NullReferenceException
+
+                decimal discount = (item.Product.Offer ?? 0) / 100m;
+                decimal itemPrice = item.Count * item.Product.Price;
+                decimal discountAmount = itemPrice * discount;
+
+               var total = CartView.TotalCarts += itemPrice - discountAmount;
             }
+
             return View(CartView);
         }
         public IActionResult Plus(int cartid)
@@ -128,7 +141,11 @@ namespace myshop.WebApp.Areas.Customer.Controllers
 
             foreach (var item in CartView.CartsList)
             {
-                CartView.TotalCarts += (item.Count * item.Product.Price);
+                decimal discount = (item.Product.Offer ?? 0) / 100m; 
+                decimal itemPrice = item.Count * item.Product.Price; 
+                decimal discountAmount = itemPrice * discount; 
+
+                CartView.TotalCarts += itemPrice - discountAmount;
             }
             return View(CartView);
 
@@ -157,9 +174,17 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                 cartView.OrderHeader.OrderDate = DateTime.Now;
                 cartView.OrderHeader.AppUserId = claim.Value;
 
+               Random random = new Random(123456789);
+                cartView.OrderHeader.TrackingNumber = random.Next(123456789).ToString();
+
                 foreach (var item in cartView.CartsList)
                 {
-                    cartView.OrderHeader.TotalPrice += (item.Count * item.Product.Price);
+                    decimal discount = (item.Product.Offer ?? 0) / 100m; // تحويل العرض إلى نسبة مئوية
+                    decimal itemPrice = item.Count * item.Product.Price; // حساب سعر الكمية كاملة
+                    decimal discountAmount = itemPrice * discount; // حساب قيمة الخصم
+
+                    cartView.OrderHeader.TotalPrice += itemPrice - discountAmount; // طرح قيمة الخصم من السعر
+                    cartView.OrderHeader.ProductId = item.ProductId;
                 }
                 _unitOfWork.OrderHeader.Add(cartView.OrderHeader);
                 _unitOfWork.Complete();
@@ -170,7 +195,7 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                     {
                         ProductId = item.ProductId,
                         OrderHeaderId = cartView.OrderHeader.Id,
-                        Price = item.Product.Price,
+                        Price = item.Product.Offer > 0 ? (item.Product.Price - (item.Product.Price * (item.Product.Offer ?? 0) / 100)) : item.Product.Price,
                         Count = item.Count
                     };
                     _unitOfWork.OrderDetail.Add(orderDetail);
@@ -193,7 +218,7 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount = (long)(item.Product.Price * 100),
+                            UnitAmount = (long)(item.Product.Offer > 0 ? (item.Product.Price - (item.Product.Price * (item.Product.Offer ?? 0) / 100)) * 100 : item.Product.Price *100),
                             Currency = "usd",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
