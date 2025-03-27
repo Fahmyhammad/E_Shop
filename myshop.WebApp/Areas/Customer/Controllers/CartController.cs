@@ -27,7 +27,10 @@ namespace myshop.WebApp.Areas.Customer.Controllers
         [HttpGet]
         public IActionResult GetCartCount()
         {
-            int count = _unitOfWork.ShoppingCart.GetAll().Count();
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
+            int count = _unitOfWork.ShoppingCart.GetAll(x=>x.AppUserId == claim.Value).Count();
             return Json(new { count });
         }
         public IActionResult Index()
