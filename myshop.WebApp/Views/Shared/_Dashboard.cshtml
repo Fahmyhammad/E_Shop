@@ -62,12 +62,11 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/Customer/Home/Index" class="nav-link">الرئيسية</a>
-                </li>
+
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown" data-toggle="dropdown">اتصل بنا <i class="fa fa-angle-down mt-1"></i></a>
                     <div class="dropdown-menu bg-primary-text-dark">
+                        <a href="/Customer/Home/Index" class="nav-link">الرئيسية</a>
                         <a href="/Identity/Account/Register" class="dropdown-item">تسجيل الدخول</a>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -234,7 +233,7 @@
     <script src="~/plugins/overlayscrollbars/js/overlayscrollbars.js"></script>
 
 
- 
+
     <!-- Page specific script -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
