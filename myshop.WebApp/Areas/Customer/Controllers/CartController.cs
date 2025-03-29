@@ -182,11 +182,11 @@ namespace myshop.WebApp.Areas.Customer.Controllers
 
                 foreach (var item in cartView.CartsList)
                 {
-                    decimal discount = (item.Product.Offer ?? 0) / 100m; // تحويل العرض إلى نسبة مئوية
-                    decimal itemPrice = item.Count * item.Product.Price; // حساب سعر الكمية كاملة
-                    decimal discountAmount = itemPrice * discount; // حساب قيمة الخصم
+                    decimal discount = (item.Product.Offer ?? 0) / 100m; 
+                    decimal itemPrice = item.Count * item.Product.Price;  
+                    decimal discountAmount = itemPrice * discount;
 
-                    cartView.OrderHeader.TotalPrice += itemPrice - discountAmount; // طرح قيمة الخصم من السعر
+                    cartView.OrderHeader.TotalPrice += itemPrice - discountAmount;
                     cartView.OrderHeader.ProductId = item.ProductId;
                 }
                 _unitOfWork.OrderHeader.Add(cartView.OrderHeader);
@@ -205,7 +205,7 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                     _unitOfWork.Complete();
 
                 }
-                var domain = "https://localhost:44364/";
+                var domain = "https://alabadranv3.runasp.net/";
                 var options = new SessionCreateOptions
                 {
                     LineItems = new List<SessionLineItemOptions>(),
@@ -240,11 +240,9 @@ namespace myshop.WebApp.Areas.Customer.Controllers
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
 
-
             }
             catch (Exception)
             {
-
                 throw;
             }
 
